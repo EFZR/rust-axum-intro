@@ -1,7 +1,6 @@
-use axum::extract::Path;
 use axum::routing::{delete, post};
 use axum::Router;
-use axum::{extract::State, Json};
+use axum::{extract::State, extract::Path, Json};
 
 use crate::ctx::Ctx;
 use crate::model::{ModelController, Ticket, TicketForCreate};
