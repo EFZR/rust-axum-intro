@@ -1,10 +1,10 @@
-use async_trait::async_trait;
 use axum::body::Body;
 use axum::extract::{FromRequestParts, State};
 use axum::http::request::Parts;
 use axum::http::{Request, Response};
 use axum::middleware::Next;
 use axum::RequestPartsExt;
+use async_trait::async_trait;
 use lazy_regex::regex_captures;
 use tower_cookies::{Cookie, Cookies};
 
@@ -51,6 +51,7 @@ pub async fn mw_ctx_resolver(
     // Store the ctx_result in the request extension
     req.extensions_mut().insert(result_ctx);
 
+    // This line passes the request to the next middleware or handler in the chain
     Ok(next.run(req).await)
 }
 

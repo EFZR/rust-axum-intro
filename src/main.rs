@@ -12,15 +12,15 @@ use axum::{
     Router,
 };
 use axum::{middleware, Json};
-use ctx::Ctx;
 use serde::Deserialize;
 use serde_json::json;
 use tower_cookies::{CookieManager, CookieManagerLayer};
 use tower_http::services::ServeDir;
 use uuid::Uuid;
 
-use crate::log::log_request;
-use crate::model::ModelController;
+use ctx::Ctx;
+use log::log_request;
+use model::ModelController;
 
 mod ctx;
 mod error;
@@ -51,6 +51,7 @@ async fn main() -> Result<()> {
     let listener = tokio::net::TcpListener::bind("127.0.0.1:8080")
         .await
         .unwrap();
+
     println!("->> LISTENING on  {:?}\n", listener);
 
     axum::serve(listener, routes_all).await.unwrap();
@@ -60,10 +61,10 @@ async fn main() -> Result<()> {
 }
 
 async fn main_response_mapper(
-    ctx:Option<Ctx>,
+    ctx: Option<Ctx>,
     uri: Uri,
     req_method: Method,
-    res: Response
+    res: Response,
 ) -> Response {
     println!("->> {:<12} - main_response_mapper", "RES_MAPPER");
 
