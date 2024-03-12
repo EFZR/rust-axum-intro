@@ -4,6 +4,8 @@ use axum::{
 };
 use serde::Serialize;
 
+
+// newtype pattern ->
 pub type Result<T> = core::result::Result<T, Error>;
 
 #[derive(Debug, Clone, Serialize, strum_macros::AsRefStr)]
